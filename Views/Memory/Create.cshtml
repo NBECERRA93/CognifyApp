@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Crear Simulación";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Mostrar mensaje si se eligió sentencia tradicional -->
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken() <!-- Agregar token CSRF -->
+
+    <div class="form-group">
+        <label for="sentencingOption">Elija la opción:</label>
+        <select class="form-control" id="sentencingOption" name="sentencingOption" required>
+            <option value="">Seleccione una opción</option>
+            <option value="Traditional">Cumplir sentencia tradicional</option>
+            <option value="AcceleratedRehabilitation">Rehabilitación acelerada (Cognify)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="crimeType">Tipo de crimen:</label>
+        <select class="form-control" id="crimeType" name="crimeType" required>
+            <option value="Violent">Crimen Violento</option>
+            <option value="Theft">Robo</option>
+            <option value="Financial">Crimen Financiero</option>
+            <option value="Hate">Crimen de Odio</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="intensity">Intensidad:</label>
+        <select class="form-control" id="intensity" name="intensity" required>
+            <option value="Low">Baja</option>
+            <option value="Medium">Media</option>
+            <option value="High">Alta</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="duration">Duración:</label>
+        <select class="form-control" id="duration" name="duration" required>
+            <option value="Short-term">Corto plazo</option>
+            <option value="Medium-term">Mediano plazo</option>
+            <option value="Long-term">Largo plazo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Simulación</button>
+</form>

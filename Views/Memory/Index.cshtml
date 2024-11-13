@@ -1,0 +1,47 @@
+﻿@model List<Cognify.Models.Simulation>
+
+<h2>Simulaciones de Crímenes</h2>
+
+<!-- Mostrar mensaje de éxito si existe -->
+@if (TempData["SuccessMessage"] != null)
+{
+            <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+            </div>
+}
+
+<!-- Mostrar mensaje de información si existe (sentencia tradicional) -->
+@if (TempData["Message"] != null)
+{
+            <div class="alert alert-info">
+        @TempData["Message"]
+            </div>
+}
+
+<!-- Botón para ir a la vista de creación de simulación -->
+<a class="btn btn-primary" href="@Url.Action("Create", "Memory")">Crear Simulación</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Tipo de Crimen</th>
+            <th>Impacto de la Simulación</th>
+            <th>Detalles de los Recuerdos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var simulation in Model)
+        {
+                    <tr>
+                        <td>@simulation.CrimeType</td>
+                        <td>@simulation.ImpactEvaluation</td>
+                        <td>
+                    @foreach (var memory in simulation.Memories)
+                    {
+                                        <p>@memory.Description - @memory.Intensity - @memory.Duration</p>
+                    }
+                        </td>
+                    </tr>
+        }
+    </tbody>
+</table>
